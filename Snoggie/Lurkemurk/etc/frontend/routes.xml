@@ -1,0 +1,13 @@
+
+<config 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    
+
+    <router id="standard">
+        <route id="lurkemurk" frontName="lurkemurk">
+            <module name="Snoggie_Lurkemurk"/>
+        </route>
+    </router>
+
+</config>
