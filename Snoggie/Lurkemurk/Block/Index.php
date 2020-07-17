@@ -84,7 +84,7 @@ class Index extends \Magento\Framework\View\Element\Template
         $atrs = $prod->getAttributes();
         
         $data = array(
-            'categories'=>$prods,
+            'products'=>$prods,
             'attributes'=>$atrs
         );
         
