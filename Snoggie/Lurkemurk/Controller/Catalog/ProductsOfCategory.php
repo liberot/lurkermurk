@@ -59,9 +59,18 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
                     ; 
                     foreach ($coll as $prod) {
                         $prdz[]= array(
+                            'sku'=>$prod->getSKU(),
                             'name'=>$prod->getName(),
                             'categoryIds'=>$prod->getCategoryIds(),
-                        ); 
+                            'description'=>$prod->getDescription(),
+                            'shortDescription'=>$prod->getShortDescription(),
+                            'image'=>$prod->getImage(),
+                            'price'=>$prod->getPrice(),
+                            'price'=>$prod->getPrice(),
+                            'urlKey'=>$prod->getUrlKey(),
+                            'quantity'=>$prod->getQuantityAndStockStatus(),
+                            'mediaGallery'=>$prod->getMediaGallery()
+                        );
                     };               
                 }
             }
