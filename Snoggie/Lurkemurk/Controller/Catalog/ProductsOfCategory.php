@@ -16,14 +16,16 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Catalog\Model\CategoryFactory $catFactory
+    		\Magento\Framework\App\Action\Context $context,
+    		\Magento\Framework\View\Result\PageFactory $pageFactory,
+    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+    		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
+            // \Magento\Catalog\Model\ProductFactory $prodFactory,
+        	\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+    		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+            \Magento\Framework\App\RequestInterface $request,
+            // \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory
+            \Magento\Catalog\Model\CategoryFactory $catFactory
         )
     {
        
@@ -44,12 +46,12 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
         $rqp = $this->request->getParams();
         
         $prdz = [];
-        $catFactory = $this->catFactory->create();
         foreach ($rqp as $key=>$val) {
             if('ids' == $key){
                 $val.= ',';
                 $ids = explode(',', $val);
                 foreach($ids as $id){
+                    $catFactory = $this->catFactory->create();
                     $cat = $catFactory->load($id);
                     $coll = $cat->getProductCollection();
                     $coll
@@ -60,6 +62,7 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
                     foreach ($coll as $prod) {
                         $prdz[]= array(
                             'sku'=>$prod->getSKU(),
+                            'id'=>$prod->getId(),
                             'name'=>$prod->getName(),
                             'categoryIds'=>$prod->getCategoryIds(),
                             'description'=>$prod->getDescription(),

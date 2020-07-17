@@ -52,13 +52,12 @@ class Index extends \Magento\Framework\View\Element\Template
             );
         }
         
-        $atrs = [];
-        $atrs = $cat->getAttributes();
+        // $atrs = [];
+        // $atrs = $cat->getAttributes();
         
         $data = array(
-            'categories'=>$cats,
-            'attributes'=>$atrs
-        );
+            'categories'=>$cats
+       );
         
         $json = json_encode($data, JSON_PRETTY_PRINT);
         return $json;
@@ -82,12 +81,11 @@ class Index extends \Magento\Framework\View\Element\Template
             );
         }
         
-        $atrs = [];
-        $atrs = $prod->getAttributes();
+        // $atrs = [];
+        // $atrs = $prod->getAttributes();
         
         $data = array(
-            'products'=>$prods,
-            'attributes'=>$atrs
+            'products'=>$prods
         );
         
         $json = json_encode($data, JSON_PRETTY_PRINT);

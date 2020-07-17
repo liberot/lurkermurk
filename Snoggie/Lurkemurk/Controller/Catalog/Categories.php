@@ -12,10 +12,10 @@ class Categories extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory
+    		\Magento\Framework\App\Action\Context $context,
+    		\Magento\Framework\View\Result\PageFactory $pageFactory,
+    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+    		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory
         )
     {
         
@@ -41,12 +41,11 @@ class Categories extends \Magento\Framework\App\Action\Action
             );
         }
         
-        $atrs = [];
-        $atrs = $cat->getAttributes();
+        // $atrs = [];
+        // $atrs = $cat->getAttributes();
         
         $data = array(
-            'categories'=>$cats,
-            'attributes'=>$atrs
+            'categories'=>$cats
         );
         
         $json = $this->jsonFactory->create();

@@ -12,12 +12,12 @@ class Products extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-		\Magento\Catalog\Model\Product\Visibility $prodVisibility
+    		\Magento\Framework\App\Action\Context $context,
+    		\Magento\Framework\View\Result\PageFactory $pageFactory,
+    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+    		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
+    		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+    		\Magento\Catalog\Model\Product\Visibility $prodVisibility
         )
     {
        
@@ -43,16 +43,16 @@ class Products extends \Magento\Framework\App\Action\Action
         foreach ($coll as $prod) {
             $prdz[]= array(
                 'name'=>$prod->getName(),
+                'id'=>$prod->getId(),
                 'categoryIds'=>$prod->getCategoryIds(),
             ); 
         };
 
-        $atrs = [];
-        $atrs = $prod->getAttributes();
+        // $atrs = [];
+        // $atrs = $prod->getAttributes();
         
         $data = array(
-            'products'=>$prdz,
-            'attributes'=>$atrs
+            'products'=>$prdz
         );
         
         $json = $this->jsonFactory->create();
