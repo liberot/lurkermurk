@@ -1,6 +1,8 @@
 <?php
 namespace Snoggie\Lurkemurk\Controller\Catalog;
 
+
+
 class Products extends \Magento\Framework\App\Action\Action 
 {
 

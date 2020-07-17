@@ -1,6 +1,8 @@
 <?php
 namespace Snoggie\Lurkemurk\Controller\Catalog;
 
+
+
 class Categories extends \Magento\Framework\App\Action\Action 
 {
 
