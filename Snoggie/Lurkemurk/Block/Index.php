@@ -46,7 +46,9 @@ class Index extends \Magento\Framework\View\Element\Template
         $cats = [];
         foreach ($coll as $cat) {
             $cats[]= array(
-                'name'=>$cat->getName(),
+                'id'=>$cat->getId(),
+                'parentId'=>$cat->getParentId(),
+                'name'=>$cat->getName()
             );
         }
         
