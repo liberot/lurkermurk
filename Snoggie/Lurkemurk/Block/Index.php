@@ -24,7 +24,6 @@ class Index extends \Magento\Framework\View\Element\Template
 			\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
 			\Magento\Catalog\Model\Product\Visibility $prodVisibility,
             \Magento\Checkout\Model\Session $cart,
-            // \Magento\Checkout\Model\Cart\CartInterface $cart,
             \Magento\Framework\App\RequestInterface $request  
 		)
 	{
