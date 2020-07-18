@@ -74,6 +74,8 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     break;
              
                 case 'sku':
+                    // hey skywalker....., das funktioniert sowieso nicht 
+                    // ./bin/magneto indexer:reindex...
                     break;
             }
         }
