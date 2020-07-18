@@ -11,6 +11,7 @@ class Index extends \Magento\Framework\View\Element\Template
 	protected $jsonFactory;
 	protected $prodStatus;
 	protected $prodVisibility;
+    protected $cart;
     protected $request;
 
 	public function __construct
@@ -22,6 +23,8 @@ class Index extends \Magento\Framework\View\Element\Template
 			\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
 			\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
 			\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+            \Magento\Checkout\Model\Session $cart,
+            // \Magento\Checkout\Model\Cart\CartInterface $cart,
             \Magento\Framework\App\RequestInterface $request  
 		)
 	{
@@ -34,12 +37,16 @@ class Index extends \Magento\Framework\View\Element\Template
 		$this->prodStatus = $prodStatus;
 		$this->prodVisibility = $prodVisibility;
         $this->request = $request; 
-
+        $this->cart = $cart;
 	}
 
     public function getCart()
     {
-        return json_encode(array('cart'=>'todo: gocart'));
+        $items = $this->cart->getQuote()->getAllVisibleItems();
+        $data = array(
+            'cart'=>$items
+        );
+        return json_encode($data, JSON_PRETTY_PRINT);
     }
 
     public function getCategories() 

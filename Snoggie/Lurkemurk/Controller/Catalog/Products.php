@@ -9,6 +9,8 @@ class Products extends \Magento\Framework\App\Action\Action
     protected $pageFactory;
     protected $jsonFactory;
     protected $prodFactory;
+    protected $prodVisibility;
+    protected $prodStatus;
     
     public function __construct
     	(
