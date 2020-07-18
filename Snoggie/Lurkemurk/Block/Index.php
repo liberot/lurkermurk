@@ -37,6 +37,11 @@ class Index extends \Magento\Framework\View\Element\Template
 
 	}
 
+    public function getCart()
+    {
+        return json_encode(array('cart'=>'todo: gocart'));
+    }
+
     public function getCategories() 
 	{
 
