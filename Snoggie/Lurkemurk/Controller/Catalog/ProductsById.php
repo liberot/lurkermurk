@@ -23,7 +23,6 @@ class ProductsById extends \Magento\Framework\App\Action\Action
         	\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
     		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
             \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
-            // \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory
             \Magento\Catalog\Model\ProductFactory $prodFactory
         )
     {

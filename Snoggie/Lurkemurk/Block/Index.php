@@ -11,6 +11,7 @@ class Index extends \Magento\Framework\View\Element\Template
 	protected $jsonFactory;
 	protected $prodStatus;
 	protected $prodVisibility;
+    protected $request;
 
 	public function __construct
 		(
@@ -20,7 +21,8 @@ class Index extends \Magento\Framework\View\Element\Template
 			\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
 			\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
 			\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-			\Magento\Catalog\Model\Product\Visibility $prodVisibility
+			\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+            \Magento\Framework\App\RequestInterface $request  
 		)
 	{
 
@@ -31,10 +33,11 @@ class Index extends \Magento\Framework\View\Element\Template
 		$this->jsonFactory = $jsonFactory;
 		$this->prodStatus = $prodStatus;
 		$this->prodVisibility = $prodVisibility;
+        $this->request = $request; 
 
 	}
 
-	public function getCategories() 
+    public function getCategories() 
 	{
 
 		$coll = $this->catFactory->create();
@@ -76,8 +79,15 @@ class Index extends \Magento\Framework\View\Element\Template
         $prods = [];
         foreach ($coll as $prod) {
             $prods[]= array(
+                'sku'=>$prod->getSKU(),
+                'id'=>$prod->getId(),
                 'name'=>$prod->getName(),
-                'categoryIds'=>$prod->getCategoryIds()
+                'categoryIds'=>$prod->getCategoryIds(),
+                'image'=>$prod->getImage(),
+                'price'=>$prod->getPrice(),
+                'urlKey'=>$prod->getUrlKey(),
+                'quantity'=>$prod->getQuantityAndStockStatus(),
+                'mediaGallery'=>$prod->getMediaGallery()
             );
         }
         

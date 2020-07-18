@@ -5,8 +5,9 @@ function(jQuery){
     'use strict';
     function main(config, element) {
         jQuery(document).ready(function(){
+            // http://127.0.0.1:8083/lurkemurk/#fsck/sck/yodel
+            console.log('deeplink: ', window.location.hash.substr(1));
             jQuery.ajax({
-                context: "#resp",
                 // url: '/lurkemurk/catalog/productsofcategory?ids=12'
                 // url: '/lurkemurk/catalog/productsofcategory?ids=12,13'
                 // url: '/lurkemurk/catalog/categories'

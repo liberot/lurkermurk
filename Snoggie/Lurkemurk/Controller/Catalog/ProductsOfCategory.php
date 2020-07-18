@@ -20,11 +20,9 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
     		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-            // \Magento\Catalog\Model\ProductFactory $prodFactory,
-        	\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+            \Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
     		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
             \Magento\Framework\App\RequestInterface $request,
-            // \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory
             \Magento\Catalog\Model\CategoryFactory $catFactory
         )
     {
