@@ -17,9 +17,9 @@ class Add extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    	    // \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-            \Magento\Catalog\Model\ProductFactory $prodFactory,
-            \Magento\Checkout\Model\Session $cart,
+    	    \Magento\Catalog\Model\ProductFactory $prodFactory,
+            // \Magento\Checkout\Model\Session $cart,
+            \Magento\Checkout\Model\Cart $cart,
             \Magento\Framework\App\RequestInterface $request
         )
     {
@@ -35,8 +35,15 @@ class Add extends \Magento\Framework\App\Action\Action
  
     public function execute()
     {
+        // ??
+        // $objManager = \Magento\Framework\App\ObjectManager::getInstance();
+        // $this->cart = $objManager->create('\Magento\Checkout\Model\Cart');
+        // ??
+
         $prodFactory = $this->prodFactory->create();
         $reqp = $this->request->getParams();
+       
+
         // fixdiss
         // fixdiss
         // fixdiss
@@ -52,20 +59,26 @@ class Add extends \Magento\Framework\App\Action\Action
                     $prod = null;
                     $prod = $prodFactory->load($id);
                     if(null != $prod){
-                        $params = array(
+                        $prms = array(
                             'qty'=>1,
                             'product'=>$prod->getId()
                         );
-                        // fixdiss memlocks...
-                        // $this->cart->addProudct($prod, $params);                
+                        $this->cart->addProduct($prod, $prms);   
+                        $this->cart->save();             
                     }
                 }
             }
         }
         // fixdiss
+        
+
         $items = $this->cart->getQuote()->getAllVisibleItems();
+        $ctems = [];
+        foreach($items as $item){
+            $ctems[]= $item->getId();
+        }
         $data = array(
-            'items'=>$ids,
+            'items'=>$ctems,
             'cart'=>'toBeEvalueated..:))',
             'reqp'=>$reqp
         );
