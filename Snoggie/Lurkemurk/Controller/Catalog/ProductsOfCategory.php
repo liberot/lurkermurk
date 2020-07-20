@@ -42,14 +42,14 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
     {
 
         $rqp = $this->request->getParams();
-        
+        $catFactory = $this->catFactory->create();
+                    
         $prdz = [];
         foreach ($rqp as $key=>$val) {
             if('ids' == $key){
                 $val.= ',';
                 $ids = explode(',', $val);
                 foreach($ids as $id){
-                    $catFactory = $this->catFactory->create();
                     $cat = $catFactory->load($id);
                     $coll = $cat->getProductCollection();
                     $coll

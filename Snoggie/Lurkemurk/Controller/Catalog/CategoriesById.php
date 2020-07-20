@@ -35,8 +35,10 @@ class CategoriesById extends \Magento\Framework\App\Action\Action
     public function execute()
     {
 
+        $catFactory = $this->catFactory->create();
+                    
         $rqp = $this->request->getParams();
-        
+                    
         $cats = [];
         foreach ($rqp as $key=>$val) {
             switch($key){
@@ -44,7 +46,6 @@ class CategoriesById extends \Magento\Framework\App\Action\Action
                 $val.= ',';
                 $ids = explode(',', $val);
                 foreach($ids as $id){
-                    $catFactory = $this->catFactory->create();
                     $cat = $catFactory->load($id);
                     if(null != $cat->getId()){
                         $cats[]= array(

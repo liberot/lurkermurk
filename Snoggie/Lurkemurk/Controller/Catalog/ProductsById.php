@@ -41,9 +41,11 @@ class ProductsById extends \Magento\Framework\App\Action\Action
     public function execute()
     {
 
+        $prodFactory = $this->prodFactory->create();
+                        
         $rqp = $this->request->getParams();
-        
         $prdz = [];
+
         foreach ($rqp as $key=>$val) {
             
             switch($key){
@@ -52,7 +54,6 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     $val.= ',';
                     $ids = explode(',', $val);
                     foreach($ids as $id){
-                        $prodFactory = $this->prodFactory->create();
                         $prod = null;
                         $prod = $prodFactory->load($id);
                         if(null != $prod->getId()){

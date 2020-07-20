@@ -1,5 +1,5 @@
 <?php
-namespace Snoggie\Lurkemurk\Controller\Catalog;
+namespace Snoggie\Lurkemurk\Controller\Cart;
 
 
 
@@ -17,8 +17,9 @@ class Add extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    	    \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-    	    \Magento\Checkout\Model\Session $cart,
+    	    // \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
+            \Magento\Catalog\Model\ProductFactory $prodFactory,
+            \Magento\Checkout\Model\Session $cart,
             \Magento\Framework\App\RequestInterface $request
         )
     {
@@ -34,22 +35,38 @@ class Add extends \Magento\Framework\App\Action\Action
  
     public function execute()
     {
-        /*
-        $product = $objectManager->create('\Magento\Catalog\Model\Product')->load($productId);
-        $params = array();      
-        $params['options[469]'] = 459;
-        $params['qty'] = 1;
-        $params['product'] = 25
-        $this->cart->addProduct($product, $params);
-        $this->cart->save();
-        */
+        $prodFactory = $this->prodFactory->create();
+        $reqp = $this->request->getParams();
+        // fixdiss
+        // fixdiss
+        // fixdiss
+        // fixdiss
+        // todo: post this values....
+        // use a post collection
+        foreach ($reqp as $key=>$val) {
+            switch($key){
+            case 'ids':
+                $val.= ',';
+                $ids = explode(',', $val);
+                foreach($ids as $id){
+                    $prod = null;
+                    $prod = $prodFactory->load($id);
+                    if(null != $prod){
+                        $params = array(
+                            'qty'=>1,
+                            'product'=>$prod->getId()
+                        );
+                        // fixdiss memlocks...
+                        // $this->cart->addProudct($prod, $params);                
+                    }
+                }
+            }
+        }
+        // fixdiss
         $items = $this->cart->getQuote()->getAllVisibleItems();
         $data = array(
-            'items'=>$items
-        );
-        $reqp = $this->request->getParams();
-        $data = array(
-            'cart'=>$data,
+            'items'=>$ids,
+            'cart'=>'toBeEvalueated..:))',
             'reqp'=>$reqp
         );
         
