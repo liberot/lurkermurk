@@ -62,7 +62,9 @@ class Index extends \Magento\Framework\View\Element\Template
             $cats[]= array(
                 'id'=>$cat->getId(),
                 'parentId'=>$cat->getParentId(),
-                'name'=>$cat->getName()
+                'name'=>$cat->getName(),
+                'path'=>$cat->getPath(),
+                'image'=>$cat->getImage()
             );
         }
         
