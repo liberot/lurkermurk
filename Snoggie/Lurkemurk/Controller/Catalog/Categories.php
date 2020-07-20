@@ -37,7 +37,11 @@ class Categories extends \Magento\Framework\App\Action\Action
         $cats = [];
         foreach ($coll as $cat) {
             $cats[]= array(
+                'id'=>$cat->getId(),
+                'parentId'=>$cat->getParentId(),
                 'name'=>$cat->getName(),
+                'path'=>$cat->getPath(),
+                'image'=>$cat->getImage()
             );
         }
         

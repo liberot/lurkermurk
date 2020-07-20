@@ -10,14 +10,16 @@ class Add extends \Magento\Framework\App\Action\Action
     protected $jsonFactory;
     protected $prodFactory;
     protected $cart;
+    protected $request;
     
     public function __construct
     	(
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-    		\Magento\Checkout\Model\Cart\CartInterface $cart
+    	    \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
+    	    \Magento\Checkout\Model\Session $cart,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
        
@@ -25,6 +27,7 @@ class Add extends \Magento\Framework\App\Action\Action
         $this->jsonFactory = $jsonFactory;
         $this->prodFactory = $prodFactory;
         $this->cart = $cart;
+        $this->request = $request;
         
         parent::__construct($context);
     }
@@ -40,9 +43,14 @@ class Add extends \Magento\Framework\App\Action\Action
         $this->cart->addProduct($product, $params);
         $this->cart->save();
         */
-        $cart = [];
+        $items = $this->cart->getQuote()->getAllVisibleItems();
         $data = array(
-            'products'=>$cart
+            'items'=>$items
+        );
+        $reqp = $this->request->getParams();
+        $data = array(
+            'cart'=>$data,
+            'reqp'=>$reqp
         );
         
         $json = $this->jsonFactory->create();
