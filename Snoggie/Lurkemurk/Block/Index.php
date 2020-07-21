@@ -11,7 +11,7 @@ class Index extends \Magento\Framework\View\Element\Template
 	protected $jsonFactory;
 	protected $prodStatus;
 	protected $prodVisibility;
-    protected $cart;
+    protected $cartUtil;
     protected $request;
 
 	public function __construct
@@ -23,27 +23,36 @@ class Index extends \Magento\Framework\View\Element\Template
 			\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
 			\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
 			\Magento\Catalog\Model\Product\Visibility $prodVisibility,
-            \Magento\Checkout\Model\Session $cart,
+            \Magento\Checkout\Helper\Cart $cartUtil,
             \Magento\Framework\App\RequestInterface $request  
 		)
 	{
 
-		parent::__construct($context, $data);
-	
 		$this->catFactory = $catFactory;
 		$this->prodFactory = $prodFactory;
 		$this->jsonFactory = $jsonFactory;
 		$this->prodStatus = $prodStatus;
 		$this->prodVisibility = $prodVisibility;
         $this->request = $request; 
-        $this->cart = $cart;
-	}
+        $this->cartUtil = $cartUtil;
+        $this->cart = $this->cartUtil->getCart();
+    
+        parent::__construct($context, $data);
+    }
 
     public function getCart()
     {
-        $items = $this->cart->getQuote()->getAllVisibleItems();
+        $ctems = [];
+        $items = $this->cart->getItems();
+        foreach($items as $item){
+            $ctems[]= array(
+                'id'=>$item->getProductId(),
+                'qty'=>$item->getQty(),
+                'name'=>$item->getProduct()->getName()
+            );
+        }
         $data = array(
-            'cart'=>$items
+            'items'=>$ctems
         );
         return json_encode($data, JSON_PRETTY_PRINT);
     }

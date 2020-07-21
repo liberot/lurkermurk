@@ -9,7 +9,8 @@ class Add extends \Magento\Framework\App\Action\Action
     protected $pageFactory;
     protected $jsonFactory;
     protected $prodFactory;
-    protected $cart;
+    protected $cartUtil;
+    protected $cart; 
     protected $request;
     
     public function __construct
@@ -18,8 +19,7 @@ class Add extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
     	    \Magento\Catalog\Model\ProductFactory $prodFactory,
-            // \Magento\Checkout\Model\Session $cart,
-            \Magento\Checkout\Model\Cart $cart,
+            \Magento\Checkout\Helper\Cart $cartUtil,
             \Magento\Framework\App\RequestInterface $request
         )
     {
@@ -27,7 +27,8 @@ class Add extends \Magento\Framework\App\Action\Action
         $this->pageFactory = $pageFactory;
         $this->jsonFactory = $jsonFactory;
         $this->prodFactory = $prodFactory;
-        $this->cart = $cart;
+        $this->cartUtil = $cartUtil;
+        $this->cart = $this->cartUtil->getCart();
         $this->request = $request;
         
         parent::__construct($context);
@@ -35,15 +36,9 @@ class Add extends \Magento\Framework\App\Action\Action
  
     public function execute()
     {
-        // ??
-        // $objManager = \Magento\Framework\App\ObjectManager::getInstance();
-        // $this->cart = $objManager->create('\Magento\Checkout\Model\Cart');
-        // ??
-
         $prodFactory = $this->prodFactory->create();
         $reqp = $this->request->getParams();
        
-
         // fixdiss
         // fixdiss
         // fixdiss
@@ -71,16 +66,17 @@ class Add extends \Magento\Framework\App\Action\Action
         }
         // fixdiss
         
-
-        $items = $this->cart->getQuote()->getAllVisibleItems();
         $ctems = [];
+        $items = $this->cart->getItems();
         foreach($items as $item){
-            $ctems[]= $item->getId();
+            $ctems[]= array(
+                'id'=>$item->getProductId(),
+                'qty'=>$item->getQty(),
+                'name'=>$item->getProduct()->getName()
+            );
         }
         $data = array(
-            'items'=>$ctems,
-            'cart'=>'toBeEvalueated..:))',
-            'reqp'=>$reqp
+            'items'=>$ctems
         );
         
         $json = $this->jsonFactory->create();
