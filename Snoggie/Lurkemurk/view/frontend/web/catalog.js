@@ -52,6 +52,10 @@ function(jQuery){ 'use strict';
             CP.post('/lurkemurk/cart/add', {'pid':'8', 'qty':'3'});
             // 
             CP.load('/lurkemurk/cart/get');    
+            // 
+            CP.post('/lurkemurk/cart/remove', {'pid':'8'});
+            // 
+            CP.load('/lurkemurk/cart/get');    
         });
     };
 
