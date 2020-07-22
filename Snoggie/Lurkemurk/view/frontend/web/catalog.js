@@ -40,6 +40,7 @@ function(jQuery){ 'use strict';
                 console.log('deeplink: ', window.location.hash.substr(1));
             }
             
+            // carefull.. this *test calls is not asiNC...
             CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
             CP.load('/lurkemurk/catalog/products');
             CP.load('/lurkemurk/catalog/productsofcategory?ids=12');
