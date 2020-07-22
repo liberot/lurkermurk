@@ -6,6 +6,7 @@ function(jQuery){ 'use strict';
 
     function main(config, element) {
 
+        // CP as in ComputerProgramm
         var CP = {};
         
         jQuery(document).ready(function(){
@@ -39,8 +40,6 @@ function(jQuery){ 'use strict';
                 console.log('deeplink: ', window.location.hash.substr(1));
             }
             
-            // ---
-            CP.load('/lurkemurk/cart/add?ids=8');
             CP.load('/lurkemurk/catalog/productsofcategory?ids=12');
             CP.load('/lurkemurk/catalog/productsofcategory?ids=12,13');
             CP.load('/lurkemurk/catalog/categories');
@@ -50,6 +49,16 @@ function(jQuery){ 'use strict';
             CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
+            // --- diss you post plz for config such
+            CP.load('/lurkemurk/cart/add?ids=8,9,10,11,12');
+            
+
+            // --- my computer system wont charge no more 35% 
+            // --- indicating project nazidelfin is discontinued ... 
+            // --- good luck 
+            // --- hey happy koding 
+            // -..
+            // --- 
         });
     };
 
