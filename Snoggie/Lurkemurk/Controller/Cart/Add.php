@@ -76,7 +76,8 @@ class Add extends \Magento\Framework\App\Action\Action
             );
         }
         $data = array(
-            'items'=>$ctems
+            'items'=>$ctems,
+            'act'=>$this->request->getActionName()
         );
         
         $json = $this->jsonFactory->create();

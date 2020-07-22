@@ -47,11 +47,12 @@ function(jQuery){ 'use strict';
             CP.load('/lurkemurk/catalog/categories');
             CP.load('/lurkemurk/catalog/productsbyid?ids=38');
             CP.load('/lurkemurk/catalog/productsbyid?ids=38,142');
+            CP.load('/lurkemurk/cart/get');        
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
             
             // --- diss you post plz for config such
-            CP.load('/lurkemurk/cart/add?ids=8,9,10,11,12');        
+            // CP.load('/lurkemurk/cart/add?ids=8,9,10,11,12');        
 
         });
     };

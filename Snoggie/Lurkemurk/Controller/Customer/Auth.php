@@ -76,7 +76,8 @@ class Auth extends \Magento\Framework\App\Action\Action
         if(false == $auth){
             $data = array(
                 'auth'=>'false',
-                'message'=>'no auth'
+                'message'=>'no auth',
+                'cmd'=>$this->request->getActionName()
             );
             $json->setData($data);
             return $json;
@@ -86,7 +87,8 @@ class Auth extends \Magento\Framework\App\Action\Action
         // mage2 might redirect for session fissmiss dunno 
         $data = array(
             'auth'=>'true',
-            'message'=>'authed all bright'
+            'message'=>'authed all bright',
+            'cmd'=>$this->request->getActionName()
         );
         $json->setData($data);
         return $json;

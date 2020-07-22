@@ -64,7 +64,7 @@ class CategoriesById extends \Magento\Framework\App\Action\Action
         
         $data = array(
             'categories'=>$cats,
-            // 'attributes'=>$cat->getAttributes()
+            'cmd'=>$this->request->getActionName()
         );
         
         $json = $this->jsonFactory->create();

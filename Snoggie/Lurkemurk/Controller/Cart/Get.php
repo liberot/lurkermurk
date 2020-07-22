@@ -39,7 +39,8 @@ class Get extends \Magento\Framework\App\Action\Action
             );
         }
         $data = array(
-            'items'=>$ctems
+            'items'=>$ctems,
+            'cmd'=>$this->request->getActionName()
         );
         $json = $this->jsonFactory->create();
         $json->setData($data);
