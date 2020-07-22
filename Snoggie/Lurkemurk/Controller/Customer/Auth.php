@@ -74,7 +74,7 @@ class Auth extends \Magento\Framework\App\Action\Action
     
         // no auth for what reason 
         if(false == $auth){
-            $data[]= array(
+            $data = array(
                 'auth'=>'false',
                 'message'=>'no auth'
             );
@@ -84,7 +84,7 @@ class Auth extends \Magento\Framework\App\Action\Action
         
         // auth 
         // mage2 might redirect for session fissmiss dunno 
-        $data[]= array(
+        $data = array(
             'auth'=>'true',
             'message'=>'authed all bright'
         );

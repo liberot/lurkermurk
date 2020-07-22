@@ -45,9 +45,6 @@ class Categories extends \Magento\Framework\App\Action\Action
             );
         }
         
-        // $atrs = [];
-        // $atrs = $cat->getAttributes();
-        
         $data = array(
             'categories'=>$cats
         );
