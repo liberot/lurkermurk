@@ -38,9 +38,12 @@ function(jQuery){ 'use strict';
                 // http://127.0.0.1:8083/lurkemurk/#cat-name/prod-name/view-name...
                 // as for javascript data driven view *manipulation
                 console.log('deeplink: ', window.location.hash.substr(1));
+                // ...dunno...
             }
             
             // carefull.. this *test calls is not asiNC...
+            CP.evalDeepLink();
+
             CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
             CP.load('/lurkemurk/catalog/products');
             CP.load('/lurkemurk/catalog/productsofcategory?ids=12');
