@@ -19,11 +19,11 @@ class ProductsById extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-            \Magento\Framework\App\RequestInterface $request,
-        	\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+            \Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
     		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
             \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
-            \Magento\Catalog\Model\ProductFactory $prodFactory
+            \Magento\Catalog\Model\ProductFactory $prodFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
        

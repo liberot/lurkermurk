@@ -9,19 +9,22 @@ class Categories extends \Magento\Framework\App\Action\Action
     protected $pageFactory;
     protected $jsonFactory;
     protected $catFactory;
+    protected $request;
     
     public function __construct
     	(
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory
+    		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
         
         $this->pageFactory = $pageFactory;
         $this->jsonFactory = $jsonFactory;
         $this->catFactory = $catFactory;
+        $this->request = $request;
 
         parent::__construct($context);
     }

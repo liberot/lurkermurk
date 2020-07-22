@@ -17,9 +17,9 @@ class CategoriesById extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-            \Magento\Framework\App\RequestInterface $request,
             \Magento\Catalog\Model\CategoryFactory $catFactory,
-            \Magento\Catalog\Model\ProductFactory $prodFactory
+            \Magento\Catalog\Model\ProductFactory $prodFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
        

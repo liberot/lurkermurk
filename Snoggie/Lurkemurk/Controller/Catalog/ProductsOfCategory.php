@@ -22,8 +22,8 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
     		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
             \Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
     		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
-            \Magento\Framework\App\RequestInterface $request,
-            \Magento\Catalog\Model\CategoryFactory $catFactory
+            \Magento\Catalog\Model\CategoryFactory $catFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
        

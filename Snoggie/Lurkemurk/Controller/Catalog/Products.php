@@ -11,6 +11,7 @@ class Products extends \Magento\Framework\App\Action\Action
     protected $prodFactory;
     protected $prodVisibility;
     protected $prodStatus;
+    protected $request; 
     
     public function __construct
     	(
@@ -19,7 +20,8 @@ class Products extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
     		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
     		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-    		\Magento\Catalog\Model\Product\Visibility $prodVisibility
+    		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
        
@@ -28,6 +30,7 @@ class Products extends \Magento\Framework\App\Action\Action
         $this->prodFactory = $prodFactory;
         $this->prodStatus = $prodStatus;
         $this->prodVisibility = $prodVisibility;
+        $this->request = $request; 
         
         parent::__construct($context);
     }

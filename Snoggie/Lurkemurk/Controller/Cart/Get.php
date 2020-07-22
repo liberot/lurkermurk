@@ -10,19 +10,23 @@ class Get extends \Magento\Framework\App\Action\Action
     protected $prodFactory;
     protected $cartUtil;
     protected $cart; 
+    protected $request; 
     
     public function __construct
     	(
     		\Magento\Framework\App\Action\Context $context,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
     	    \Magento\Catalog\Model\ProductFactory $prodFactory,
-            \Magento\Checkout\Helper\Cart $cartUtil
+            \Magento\Checkout\Helper\Cart $cartUtil,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
         $this->jsonFactory = $jsonFactory;
         $this->prodFactory = $prodFactory;
         $this->cartUtil = $cartUtil;
         $this->cart = $this->cartUtil->getCart();
+        $this->request = $request; 
+        
         parent::__construct($context);
     }
  
@@ -33,9 +37,8 @@ class Get extends \Magento\Framework\App\Action\Action
         $items = $this->cart->getItems();
         foreach($items as $item){
             $ctems[]= array(
-                'id'=>$item->getProductId(),
-                'qty'=>$item->getQty(),
-                'name'=>$item->getProduct()->getName()
+                'pid'=>$item->getProductId(),
+                'qty'=>$item->getQty()
             );
         }
         $data = array(

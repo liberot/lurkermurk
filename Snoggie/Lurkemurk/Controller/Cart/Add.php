@@ -36,48 +36,31 @@ class Add extends \Magento\Framework\App\Action\Action
  
     public function execute()
     {
+        // reads post fields
+        $pid = $this->request->getParam('pid');
+        $pid = intval($pid);
+        $qty = $this->request->getParam('qty');
+        $qty = intval($qty);
+
+        // fetches the product
         $prodFactory = $this->prodFactory->create();
-        $reqp = $this->request->getParams();
-       
-        // fixdiss
-        // fixdiss
-        // fixdiss
-        // fixdiss
-        // todo: post this values....
-        // use a post collection
-        foreach ($reqp as $key=>$val) {
-            switch($key){
-            case 'ids':
-                $val.= ',';
-                $ids = explode(',', $val);
-                foreach($ids as $id){
-                    $prod = null;
-                    $prod = $prodFactory->load($id);
-                    if(null != $prod){
-                        $prms = array(
-                            'qty'=>1,
-                            'product'=>$prod->getId()
-                        );
-                        $this->cart->addProduct($prod, $prms);   
-                        $this->cart->save();             
-                    }
-                }
-            }
-        }
-        // fixdiss
         
-        $ctems = [];
-        $items = $this->cart->getItems();
-        foreach($items as $item){
-            $ctems[]= array(
-                'id'=>$item->getProductId(),
-                'qty'=>$item->getQty(),
-                'name'=>$item->getProduct()->getName()
+        // adds the product to the cart
+        $res = false;
+        $prod = $prodFactory->load($pid);
+        if(null != $prod){
+            $prms = array(
+                'product'=>$prod->getId(),
+                'qty'=>$qty,
             );
+            $this->cart->addProduct($prod, $prms);   
+            $this->cart->save();             
         }
+
+        // result
         $data = array(
-            'items'=>$ctems,
-            'act'=>$this->request->getActionName()
+            'res'=>'???',
+            'cmd'=>$this->request->getActionName()
         );
         
         $json = $this->jsonFactory->create();
