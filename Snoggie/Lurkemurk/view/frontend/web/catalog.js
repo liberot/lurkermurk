@@ -53,11 +53,9 @@ function(jQuery){ 'use strict';
             CP.load('/lurkemurk/catalog/productsbyid?ids=38,142');
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
+            // 
             CP.post('/lurkemurk/cart/add', {'pid':'8', 'qty':'3'});
-            // 
-            CP.load('/lurkemurk/cart/get');    
-            // 
-            CP.post('/lurkemurk/cart/remove', {'pid':'8'});
+            CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
             // 
             CP.load('/lurkemurk/cart/get');    
         });
