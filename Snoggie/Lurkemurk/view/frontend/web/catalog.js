@@ -49,7 +49,7 @@ function(jQuery){ 'use strict';
             CP.load('/lurkemurk/catalog/products');
             CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
             // ---
-            CP.post('/lurkemurk/customer/auth', [{'clnt':'lemmey'}, {'pass':'login'}]);
+            CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
         });
     };
 
