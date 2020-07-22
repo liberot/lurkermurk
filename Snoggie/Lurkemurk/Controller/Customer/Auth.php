@@ -49,26 +49,7 @@ class Auth extends \Magento\Framework\App\Action\Action
         $clnt = $this->request->getParam('clnt');
         $pass = $this->request->getParam('pass');
         
-        if('' == $clnt){
-            $data[]= array(
-                'auth'=>'false',
-                'message'=>'no client'
-            );
-            $json->setData($data);
-            return $json;
-        }
-        
-        if('' == $pass){
-            $data[]= array(
-                'auth'=>'false',
-                'message'=>'no pass'
-            );
-            $json->setData($data);
-            return $json;
-        }
-        
-        // app/code/Magento/Customer/Model/Customer.php
-        // authenticate();
+        // app/code/Magento/Customer/Model/Customer.php::authenticate();
         $auth = false; 
         
         // fetches customer
@@ -77,14 +58,21 @@ class Auth extends \Magento\Framework\App\Action\Action
             // .. confirmation issues
         }
 
-        // auths customer
+        // no such customer
+        // ..
+
+        // auth trial of client customer
         if($auth = $this->customer->validatePassword($pass)){
+            // this might redirect the browser
+            // for session renewal issues 
+            // beats me...
             $this->customer->_eventManager->dispatch(
                 'customer_customer_authenticated',
                 ['model'=>$this->customer, 'password'=>$pass]
             );
         };
     
+        // no auth for what reason 
         if(false == $auth){
             $data[]= array(
                 'auth'=>'false',
@@ -94,6 +82,8 @@ class Auth extends \Magento\Framework\App\Action\Action
             return $json;
         }
         
+        // auth 
+        // mage2 might redirect for session fissmiss dunno 
         $data[]= array(
             'auth'=>'true',
             'message'=>'authed all bright'
