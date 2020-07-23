@@ -54,9 +54,25 @@ class Auth extends \Magento\Framework\App\Action\Action
         
         // fetches customer
         $this->customer = $this->customer->loadByEmail($clnt);
-        if($this->customer->getConfirmation()){
-            // .. confirmation issues
+
+        // confirmation issue 
+        /*
+        if($this->customer->getConfirmation() && 
+            $this->customer->accountConfirmation->isConfirmationRequired(
+                $this->customer->getWebsiteId(), 
+                $this->customer->getId(), 
+                $this->customer->getEmail()
+            )
+        ){
+            $data = array(
+                'cmd'=>$this->request->getActionName(),
+                'auth'=>'false',
+                'message'=>'not confirmed'
+            );
+            $json->setData($data);
+            return $json;
         }
+        */
 
         // no such customer
         // ..
@@ -66,10 +82,12 @@ class Auth extends \Magento\Framework\App\Action\Action
             // this might redirect the browser
             // for session renewal issues 
             // beats me...
+            /*
             $this->customer->_eventManager->dispatch(
                 'customer_customer_authenticated',
                 ['model'=>$this->customer, 'password'=>$pass]
             );
+            */
         };
     
         // no auth for what reason 

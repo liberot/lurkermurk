@@ -73,6 +73,7 @@ function(jQuery){ 'use strict';
             CP.load('/lurkemurk/catalog/productsbyid?ids=38,142');
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
+            CP.post('/lurkemurk/customer/auth', {'clnt':'email@domain.com', 'pass':'password'});
             // 
             CP.post('/lurkemurk/cart/truncate');
             CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
@@ -80,7 +81,7 @@ function(jQuery){ 'use strict';
             // 
             CP.load('/lurkemurk/cart/listitems');
         
-            CP.setLink('/der/mond/steigt/auf/den/tisch/also/steht/der/mond/auf/dem/tisch');
+            CP.evalLink();
             CP.setLink('/category/product/view');
             CP.evalLink();
             
