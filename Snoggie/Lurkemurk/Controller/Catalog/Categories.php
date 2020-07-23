@@ -49,8 +49,8 @@ class Categories extends \Magento\Framework\App\Action\Action
         }
         
         $data = array(
-            'categories'=>$cats,
-            'cmd'=>$this->request->getActionName()
+            'cmd'=>$this->request->getActionName(),
+            'categories'=>$cats
         );
         
         $json = $this->jsonFactory->create();

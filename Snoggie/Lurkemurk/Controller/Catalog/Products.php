@@ -57,8 +57,8 @@ class Products extends \Magento\Framework\App\Action\Action
         // $atrs = $prod->getAttributes();
         
         $data = array(
-            'products'=>$prdz,
-            'cmd'=>$this->request->getActionName()
+            'cmd'=>$this->request->getActionName(),
+            'products'=>$prdz
         );
         
         $json = $this->jsonFactory->create();

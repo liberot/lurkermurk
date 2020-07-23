@@ -78,8 +78,8 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
         }
         
         $data = array(
-            'products'=>$prdz,
-            'cmd'=>$this->request->getActionName()
+            'cmd'=>$this->request->getActionName(),
+            'products'=>$prdz
         );
         
         $json = $this->jsonFactory->create();

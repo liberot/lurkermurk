@@ -3,7 +3,7 @@ namespace Snoggie\Lurkemurk\Controller\Cart;
 
 
 
-class Get extends \Magento\Framework\App\Action\Action 
+class ListItems extends \Magento\Framework\App\Action\Action 
 {
 
     protected $jsonFactory;
@@ -42,8 +42,8 @@ class Get extends \Magento\Framework\App\Action\Action
             );
         }
         $data = array(
-            'items'=>$ctems,
-            'cmd'=>$this->request->getActionName()
+            'cmd'=>$this->request->getActionName(),
+            'items'=>$ctems
         );
         $json = $this->jsonFactory->create();
         $json->setData($data);

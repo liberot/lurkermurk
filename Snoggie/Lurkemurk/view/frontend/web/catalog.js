@@ -54,10 +54,11 @@ function(jQuery){ 'use strict';
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
             // 
-            CP.post('/lurkemurk/cart/add', {'pid':'8', 'qty':'3'});
+            CP.post('/lurkemurk/cart/truncate');
+            CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
             CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
             // 
-            CP.load('/lurkemurk/cart/get');    
+            CP.load('/lurkemurk/cart/listitems');
         });
     };
 

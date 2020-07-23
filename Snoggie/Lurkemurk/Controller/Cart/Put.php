@@ -3,7 +3,7 @@ namespace Snoggie\Lurkemurk\Controller\Cart;
 
 
 
-class Add extends \Magento\Framework\App\Action\Action 
+class Put extends \Magento\Framework\App\Action\Action 
 {
 
     protected $pageFactory;
@@ -55,12 +55,13 @@ class Add extends \Magento\Framework\App\Action\Action
             );
             $this->cart->addProduct($prod, $prms);   
             $this->cart->save();             
+            $res = true;
         }
 
         // result
         $data = array(
-            'res'=>'???',
-            'cmd'=>$this->request->getActionName()
+            'cmd'=>$this->request->getActionName(),
+            'res'=>$res ? 'true' : 'false'
         );
         
         $json = $this->jsonFactory->create();
