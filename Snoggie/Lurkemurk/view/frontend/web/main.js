@@ -1,6 +1,9 @@
-define([
-    'jquery'
-], 
+define(
+
+[ 'jquery' ], 
+
+
+
 
 function(jQuery){ 'use strict';
 
