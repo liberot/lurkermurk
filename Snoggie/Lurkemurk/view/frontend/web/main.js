@@ -20,23 +20,22 @@ function(jQuery){ 'use strict';
 
             CP.setLink = function(chunk){
                 
-                /*
                 var lnk = '';
                     lnk = window.location.href;
-                    lnk = lnk.replace(/\/#.{1,255}/, '');
+                    lnk = lnk.replace(/\/+#.{1,255}/, '');
+                    lnk = lnk.replace(/\/+$/, '');
                     lnk = lnk +chunk; 
-                */
 
+                window.location.href = lnk;
+                
                 /*
                 var lnk = '';
                     lnk = window.location.href.substr(1);
-                    
                 if(lnk.match(/\/$/)){
                     chunk = chunk.replace(/^\//, '');
                 }
                 */
-                
-                window.location.hash = chunk;
+                // window.location.hash = chunk;
             }
             
             CP.load = function(){
@@ -80,9 +79,14 @@ function(jQuery){ 'use strict';
             // 
             CP.load('/lurkemurk/cart/listitems');
         
-            CP.setLink('/category/product/view');
-            CP.setLink('/cat/prod/view/18');
-            CP.evalLink();
+            setTimeout(
+                function(){
+                    CP.setLink('/#/category/product/view');
+                    CP.setLink('/#/cat/prod/view/18');
+                    CP.evalLink();
+                }, 
+                10000
+            );
         });
     };
 
