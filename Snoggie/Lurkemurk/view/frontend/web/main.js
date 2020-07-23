@@ -10,6 +10,35 @@ function(jQuery){ 'use strict';
         
         jQuery(document).ready(function(){
             
+            CP.evalLink = function(){
+                // entry point of the *app
+                // http://127.0.0.1:8083/lurkemurk/#cat-name/prod-name/view-name...
+                // as for javascript data driven view *manipulation
+                console.log('link: ', window.location.hash.substr(1));
+                // ...dunno...
+            }
+
+            CP.setLink = function(chunk){
+                
+                /*
+                var lnk = '';
+                    lnk = window.location.href;
+                    lnk = lnk.replace(/\/#.{1,255}/, '');
+                    lnk = lnk +chunk; 
+                */
+
+                /*
+                var lnk = '';
+                    lnk = window.location.href.substr(1);
+                    
+                if(lnk.match(/\/$/)){
+                    chunk = chunk.replace(/^\//, '');
+                }
+                */
+                
+                window.location.hash = chunk;
+            }
+            
             CP.load = function(){
                 
                 jQuery.ajax({
@@ -33,17 +62,8 @@ function(jQuery){ 'use strict';
                 });
             }
             
-            CP.evalDeepLink = function(){
-                // entry point of the *app
-                // http://127.0.0.1:8083/lurkemurk/#cat-name/prod-name/view-name...
-                // as for javascript data driven view *manipulation
-                console.log('deeplink: ', window.location.hash.substr(1));
-                // ...dunno...
-            }
-            
             // carefull.. this *test calls is not asiNC...
-            CP.evalDeepLink();
-
+            
             CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
             CP.load('/lurkemurk/catalog/products');
             CP.load('/lurkemurk/catalog/productsofcategory?ids=12');
@@ -59,6 +79,10 @@ function(jQuery){ 'use strict';
             CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
             // 
             CP.load('/lurkemurk/cart/listitems');
+        
+            CP.setLink('/category/product/view');
+            CP.setLink('/cat/prod/view/18');
+            CP.evalLink();
         });
     };
 
