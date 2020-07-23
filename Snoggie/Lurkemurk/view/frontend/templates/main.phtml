@@ -11,7 +11,43 @@ Customer commands
 Singlepage approach with deeplink fun ( ExtJS, React, VueJS )
 <br/>
 <br/>
+CP.load('/lurkemurk/catalog/categoriesbyid?ids=8');
 <br/>
+CP.load('/lurkemurk/catalog/products');
+<br/>
+CP.load('/lurkemurk/catalog/productsofcategory?ids=12');
+<br/>
+CP.load('/lurkemurk/catalog/productsofcategory?ids=12,13');
+<br/>
+CP.load('/lurkemurk/catalog/categories');
+<br/>
+CP.load('/lurkemurk/catalog/productsbyid?ids=38');
+<br/>
+CP.load('/lurkemurk/catalog/productsbyid?ids=38,142');
+<br/>
+CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
+<br/>
+CP.post('/lurkemurk/customer/auth', {'clnt':'email@domain.com', 'pass':'password'});
+<br/>
+CP.post('/lurkemurk/cart/truncate');
+<br/>
+CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
+<br/>
+CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
+<br/>
+CP.load('/lurkemurk/cart/listitems');
+<br/>
+CP.load('/lurkemurk/catalog/productsbyid?skus=24-WB03');
+<br/>
+CP.setLink('/saufen/indoor/danziger-goldwasser');
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+            
+
+
 
 <?php print $block->getCart();		 					?>
 <br/>

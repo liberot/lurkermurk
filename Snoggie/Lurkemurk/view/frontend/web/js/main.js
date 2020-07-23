@@ -83,7 +83,7 @@ function(jQuery){ 'use strict';
             // 
             CP.load('/lurkemurk/cart/listitems');
         
-            CP.setLink('/saufen/indoor/danziger-goldwasser');
+            CP.setLink('/laufen/indoor/adidas-manhatten');
             CP.evalLink();
         });
     };

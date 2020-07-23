@@ -13,6 +13,7 @@ class ProductsById extends \Magento\Framework\App\Action\Action
     protected $prodVisibility;
     protected $request;
     protected $catFactory;
+    protected $productRepo; 
     
     public function __construct
     	(
@@ -23,7 +24,8 @@ class ProductsById extends \Magento\Framework\App\Action\Action
     		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
             \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
             \Magento\Catalog\Model\ProductFactory $prodFactory,
-            \Magento\Framework\App\RequestInterface $request
+            \Magento\Framework\App\RequestInterface $request,
+            \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
         )
     {
        
@@ -34,7 +36,8 @@ class ProductsById extends \Magento\Framework\App\Action\Action
         $this->prodVisibility = $prodVisibility;
         $this->request = $request; 
         $this->catFactory = $catFactory;
-        
+        $this->productRepo = $productRepo; 
+
         parent::__construct($context);
     }
  
@@ -54,7 +57,6 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     $val.= ',';
                     $ids = explode(',', $val);
                     foreach($ids as $id){
-                        $prod = null;
                         $prod = $prodFactory->load($id);
                         if(null != $prod->getId()){
                             $prdz[]= array(
@@ -74,8 +76,28 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     }
                     break;
              
-                case 'sku':
-                    
+                case 'skus':
+                    $val.= ',';
+                    $skus = explode(',', $val);
+                    foreach($skus as $sku){
+                        $id = $prodFactory->getIdBySku($sku);
+                        $prod = $prodFactory->load($id);
+                        if(null != $prod->getId()){
+                            $prdz[]= array(
+                                'sku'=>$prod->getSKU(),
+                                'id'=>$prod->getId(),
+                                'name'=>$prod->getName(),
+                                'categoryIds'=>$prod->getCategoryIds(),
+                                'description'=>$prod->getDescription(),
+                                'shortDescription'=>$prod->getShortDescription(),
+                                'image'=>$prod->getImage(),
+                                'price'=>$prod->getPrice(),
+                                'urlKey'=>$prod->getUrlKey(),
+                                'quantity'=>$prod->getQuantityAndStockStatus(),
+                                'mediaGallery'=>$prod->getMediaGallery()
+                            );    
+                        }
+                    }                
                     break;
             }
         }
