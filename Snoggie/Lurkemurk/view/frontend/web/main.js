@@ -5,8 +5,7 @@ define(
 
 
 
-function(jQuery){ 'use strict';
-
+function(jQuery){ 'use strict'; 
     function main(config, element) {
 
         var CP = {};
@@ -84,7 +83,7 @@ function(jQuery){ 'use strict';
             // 
             CP.load('/lurkemurk/cart/listitems');
         
-            CP.setLink('/category/product/detail');
+            CP.setLink('/saufen/indoor/danziger-goldwasser');
             CP.evalLink();
         });
     };
