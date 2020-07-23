@@ -40,6 +40,7 @@ class Auth extends \Magento\Framework\App\Action\Action
     
         $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
         $storeId = $this->storeManager->getStore()->getStoreId();
+        
         $this->customer->setWebsiteId($websiteId);
         $this->customer->setStoreId($storeId);
 
@@ -50,6 +51,7 @@ class Auth extends \Magento\Framework\App\Action\Action
         $pass = $this->request->getParam('pass');
         
         // app/code/Magento/Customer/Model/Customer.php::authenticate();
+        $name = '';
         $auth = false; 
         
         // fetches customer
@@ -88,6 +90,7 @@ class Auth extends \Magento\Framework\App\Action\Action
                 ['model'=>$this->customer, 'password'=>$pass]
             );
             */
+            $name = $this->customer->getName();
         };
     
         // no auth for what reason 
@@ -106,7 +109,8 @@ class Auth extends \Magento\Framework\App\Action\Action
         $data = array(
             'cmd'=>$this->request->getActionName(),
             'auth'=>'true',
-            'message'=>'authed all bright'
+            'message'=>'authed all bright',
+            'name'=>$name
         );
         $json->setData($data);
         return $json;

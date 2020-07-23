@@ -81,10 +81,8 @@ function(jQuery){ 'use strict';
             // 
             CP.load('/lurkemurk/cart/listitems');
         
+            CP.setLink('/category/product/detail');
             CP.evalLink();
-            CP.setLink('/category/product/view');
-            CP.evalLink();
-            
         });
     };
 
