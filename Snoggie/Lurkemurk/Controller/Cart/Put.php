@@ -48,7 +48,7 @@ class Put extends \Magento\Framework\App\Action\Action
         // adds the product to the cart
         $res = false;
         $prod = $prodFactory->load($pid);
-        if(null != $prod){
+        if(null != $prod->getId()){
             $prms = array(
                 'product'=>$prod->getId(),
                 'qty'=>$qty,
