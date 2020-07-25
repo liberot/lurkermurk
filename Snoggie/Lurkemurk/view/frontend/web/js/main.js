@@ -76,7 +76,7 @@ function(jQuery){ 'use strict';
             // ---
             CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
             CP.post('/lurkemurk/customer/auth', {'clnt':'email@domain.com', 'pass':'password'});
-            CP.post('/lurkemurk/customer/register', {'clnt': 'fako@igit.com', 'pass':'31affe', 'forename':'Fako', 'surename': 'Loco'});
+            CP.post('/lurkemurk/customer/register', {'clnt': 'igit@igit.igit', 'pass':'31affe', 'forename':'Pixi', 'surename': 'Xacua'});
             // 
             CP.post('/lurkemurk/cart/truncate');
             CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
