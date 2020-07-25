@@ -11,7 +11,7 @@ class Register extends \Magento\Framework\App\Action\Action
     protected $request; 
     protected $jsonFactory;
     protected $validatorFactory;
-
+    
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -35,29 +35,34 @@ class Register extends \Magento\Framework\App\Action\Action
         $forename = $this->request->getParam('forename');
         $surename = $this->request->getParam('surename');
 
-        //... ?? 
-
-        $json = $this->jsonFactory->create();
+        $validatorFactory = $this->validatorFactory;
         
+        $json = $this->jsonFactory->create();
         $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
+        $storeId = $this->storeManager->getStore()->getStoreId();
         $customer = $this->customerFactory->create();
         
         $customer->setWebsiteId($websiteId);
+        $customer->setStoreId($storeId);
         $customer->setEmail($clnt); 
         $customer->setFirstname($forename);
         $customer->setLastname($surename);
         $customer->setPassword($pass);
-
-        $validator = $this->validatorFactory->createValidator('customer', 'save');
+        
+        // app/code/Magento/Customer/Model/ResourceModel/Customer.php::_beforeSave($customer);
+        $validator = $validatorFactory->createValidator('customer', 'save');
         if(false == $validator->isValid($customer)) {
             $data = array(
                 'cmd'=>$this->request->getActionName(),
-                'message'=>'customer object is not valid'
+                'res'=>'customer object is not valid',
+                'messages'=>$validator->getMessages()
             );
             $json->setData($data);
-            return $json;    
+            return $json;
         }
-
+        // does customer exist?
+        // ...
+        
         $customer->save();
         $customer->sendNewAccountEmail();
 
