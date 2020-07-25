@@ -11,6 +11,7 @@ class Register extends \Magento\Framework\App\Action\Action
     protected $request; 
     protected $jsonFactory;
     protected $validatorFactory;
+    protected $customerGroups;
     
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -18,6 +19,7 @@ class Register extends \Magento\Framework\App\Action\Action
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Magento\Framework\Validator\Factory $validatorFactory,
+        \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroup,
         \Magento\Framework\App\RequestInterface $request
     ) {
         $this->storeManager = $storeManager;
@@ -25,6 +27,7 @@ class Register extends \Magento\Framework\App\Action\Action
         $this->request = $request; 
         $this->jsonFactory = $jsonFactory;
         $this->validatorFactory = $validatorFactory;
+        $this->customerGroups = $customerGroups;
         parent::__construct($context);
     }
 
@@ -48,6 +51,7 @@ class Register extends \Magento\Framework\App\Action\Action
         $customer->setFirstname($forename);
         $customer->setLastname($surename);
         $customer->setPassword($pass);
+        // $customer->setGroupId(?? -> $this->customerGroups->get ?? );
         
         // app/code/Magento/Customer/Model/ResourceModel/Customer.php::_beforeSave($customer);
         $validator = $validatorFactory->createValidator('customer', 'save');
