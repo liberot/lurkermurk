@@ -25,28 +25,20 @@ class AddMockCustomer extends \Magento\Framework\App\Action\Action
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Customer\Model\CustomerFactory $customerFactory
     ) {
-        $this->storeManager     = $storeManager;
-        $this->customerFactory  = $customerFactory;
-
+        $this->storeManager = $storeManager;
+        $this->customerFactory = $customerFactory;
         parent::__construct($context);
     }
 
     public function execute()
     {
-        // Get Website ID
-        $websiteId  = $this->storeManager->getWebsite()->getWebsiteId();
-
-        // Instantiate object (this is the most important part)
-        $customer   = $this->customerFactory->create();
+        $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
+        $customer = $this->customerFactory->create();
         $customer->setWebsiteId($websiteId);
-
-        // Preparing data for new customer
         $customer->setEmail("email@domain.com"); 
         $customer->setFirstname("First Name");
         $customer->setLastname("Last name");
         $customer->setPassword("password");
-
-        // Save data
         $customer->save();
         $customer->sendNewAccountEmail();
     }

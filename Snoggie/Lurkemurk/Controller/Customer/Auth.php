@@ -37,7 +37,6 @@ class Auth extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-    
         $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
         $storeId = $this->storeManager->getStore()->getStoreId();
         
@@ -54,13 +53,10 @@ class Auth extends \Magento\Framework\App\Action\Action
         $name = '';
         $auth = false; 
         
-        // fetches customer
         $this->customer = $this->customer->loadByEmail($clnt);
 
-        // confirmation issue 
-        /*
-        if($this->customer->getConfirmation() && 
-            $this->customer->accountConfirmation->isConfirmationRequired(
+        if($this->customer->getConfirmation() 
+            && $this->customer->accountConfirmation->isConfirmationRequired(
                 $this->customer->getWebsiteId(), 
                 $this->customer->getId(), 
                 $this->customer->getEmail()
@@ -74,47 +70,27 @@ class Auth extends \Magento\Framework\App\Action\Action
             $json->setData($data);
             return $json;
         }
-        */
-
-        // no such customer
-        // ..
-
-        // auth trial of client customer
+        
         if($auth = $this->customer->validatePassword($pass)){
-            // this might redirect the browser
-            // for session renewal issues 
-            // beats me...
-            /*
-            $this->customer->_eventManager->dispatch(
-                'customer_customer_authenticated',
-                ['model'=>$this->customer, 'password'=>$pass]
-            );
-            */
             $name = $this->customer->getName();
-        };
-    
-        // no auth for what reason 
-        if(false == $auth){
+            
             $data = array(
                 'cmd'=>$this->request->getActionName(),
-                'auth'=>'false',
-                'message'=>'no auth'
+                'auth'=>'true',
+                'message'=>'authed all bright',
+                'name'=>$name
             );
             $json->setData($data);
             return $json;
-        }
-        
-        // auth 
-        // mage2 might redirect for session fissmiss dunno 
+        };
+    
         $data = array(
             'cmd'=>$this->request->getActionName(),
-            'auth'=>'true',
-            'message'=>'authed all bright',
-            'name'=>$name
+            'auth'=>'false',
+            'message'=>'no auth'
         );
         $json->setData($data);
         return $json;
-    
     }
 }
 
