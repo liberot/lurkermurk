@@ -12,6 +12,7 @@ class Register extends \Magento\Framework\App\Action\Action
     protected $jsonFactory;
     protected $validatorFactory;
     protected $customerGroups;
+    protected $customer;
     
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -19,8 +20,9 @@ class Register extends \Magento\Framework\App\Action\Action
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
         \Magento\Framework\Validator\Factory $validatorFactory,
-        \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroup,
-        \Magento\Framework\App\RequestInterface $request
+        \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroups,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Customer\Model\Customer $customer
     ) {
         $this->storeManager = $storeManager;
         $this->customerFactory = $customerFactory;
@@ -28,32 +30,47 @@ class Register extends \Magento\Framework\App\Action\Action
         $this->jsonFactory = $jsonFactory;
         $this->validatorFactory = $validatorFactory;
         $this->customerGroups = $customerGroups;
+        $this->customer = $customer; 
+        
         parent::__construct($context);
     }
 
     public function execute()
     {
+        $json = $this->jsonFactory->create();
+        $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
+        $storeId = $this->storeManager->getStore()->getStoreId();
+        $groups = $this->customerGroups->toOptionHash();
+
         $clnt = $this->request->getParam('clnt');
         $pass = $this->request->getParam('pass');
         $forename = $this->request->getParam('forename');
         $surename = $this->request->getParam('surename');
 
-        $validatorFactory = $this->validatorFactory;
+        $this->customer->setWebsiteId($websiteId);
+        $this->customer->setStoreId($storeId);
+        $this->customer = $this->customer->loadByEmail($clnt);
+        if(null != $this->customer->getId()){
+            $data = array(
+                'cmd'=>$this->request->getActionName(),
+                'res'=>'customer already exists'
+            );
+            $json->setData($data);
+            return $json;
+        }
         
-        $json = $this->jsonFactory->create();
-        $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
-        $storeId = $this->storeManager->getStore()->getStoreId();
         $customer = $this->customerFactory->create();
-        
         $customer->setWebsiteId($websiteId);
         $customer->setStoreId($storeId);
         $customer->setEmail($clnt); 
         $customer->setFirstname($forename);
         $customer->setLastname($surename);
         $customer->setPassword($pass);
-        // $customer->setGroupId(?? -> $this->customerGroups->get ?? );
-        
-        // app/code/Magento/Customer/Model/ResourceModel/Customer.php::_beforeSave($customer);
+        // {"groups":["NOT LOGGED IN","General","Wholesale","Retailer"]}
+        $customer->setGroupId(1);
+       
+        // ./app/code/Magento/Customer/Model/ResourceModel/Customer.php::_beforeSave($customer);
+        $validatorFactory = $this->validatorFactory;
         $validator = $validatorFactory->createValidator('customer', 'save');
         if(false == $validator->isValid($customer)) {
             $data = array(
@@ -64,15 +81,13 @@ class Register extends \Magento\Framework\App\Action\Action
             $json->setData($data);
             return $json;
         }
-        // does customer exist?
-        // ...
         
         $customer->save();
         $customer->sendNewAccountEmail();
 
         $data = array(
             'cmd'=>$this->request->getActionName(),
-            'message'=>'this i dunno some error might get raised somewhere sometime since there might be a customer already registered and such but there is no such procedures mentioned in app/code/Magento/Customer/Model/Customer.php'
+            'groups'=>$groups
         );
         
         $json->setData($data);

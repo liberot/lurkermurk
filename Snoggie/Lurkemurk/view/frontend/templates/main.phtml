@@ -29,11 +29,15 @@ CP.post('/lurkemurk/customer/auth', {'clnt':'lemmey', 'pass':'login'});
 <br/>
 CP.post('/lurkemurk/customer/auth', {'clnt':'email@domain.com', 'pass':'password'});
 <br/>
+CP.post('/lurkemurk/customer/register', {'clnt': 'fako@igit.com', 'pass':'31affe', 'forename':'Mendel', 'surename': 'Bum'});
+<br/>
+CP.post('/lurkemurk/customer/register', {'clnt': 'fako@igit.com', 'pass':'31affe', 'forename':'Saul', 'surename': 'Bum'});
+<br/>
 CP.post('/lurkemurk/cart/truncate');
 <br/>
-CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
+CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'491'});
 <br/>
-CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
+CP.post('/lurkemurk/cart/remove', {'pid':'8'});
 <br/>
 CP.load('/lurkemurk/cart/listitems');
 <br/>

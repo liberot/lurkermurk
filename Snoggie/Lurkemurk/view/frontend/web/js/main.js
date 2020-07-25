@@ -80,7 +80,7 @@ function(jQuery){ 'use strict';
             // 
             CP.post('/lurkemurk/cart/truncate');
             CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
-            CP.post('/lurkemurk/cart/remove', {'pid':'8', 'qty':'2'});
+            CP.post('/lurkemurk/cart/remove', {'pid':'8'});
             // 
             CP.load('/lurkemurk/cart/listitems');
         
