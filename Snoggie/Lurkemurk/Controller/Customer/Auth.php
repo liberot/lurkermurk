@@ -73,7 +73,6 @@ class Auth extends \Magento\Framework\App\Action\Action
         
         if($auth = $this->customer->validatePassword($pass)){
             $name = $this->customer->getName();
-            
             $data = array(
                 'cmd'=>$this->request->getActionName(),
                 'auth'=>'true',
@@ -84,6 +83,7 @@ class Auth extends \Magento\Framework\App\Action\Action
             return $json;
         };
     
+        // no auth 
         $data = array(
             'cmd'=>$this->request->getActionName(),
             'auth'=>'false',
