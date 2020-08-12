@@ -14,15 +14,16 @@ class Register extends \Magento\Framework\App\Action\Action
     protected $customerGroups;
     protected $customer;
     
-    public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Customer\Model\CustomerFactory $customerFactory,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Magento\Framework\Validator\Factory $validatorFactory,
-        \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroups,
-        \Magento\Framework\App\RequestInterface $request,
-        \Magento\Customer\Model\Customer $customer
+    public function __construct
+        (
+            \Magento\Framework\App\Action\Context $context,
+            \Magento\Store\Model\StoreManagerInterface $storeManager,
+            \Magento\Customer\Model\CustomerFactory $customerFactory,
+            \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+            \Magento\Framework\Validator\Factory $validatorFactory,
+            \Magento\Customer\Model\ResourceModel\Group\Collection $customerGroups,
+            \Magento\Framework\App\RequestInterface $request,
+            \Magento\Customer\Model\Customer $customer
     ) {
         $this->storeManager = $storeManager;
         $this->customerFactory = $customerFactory;

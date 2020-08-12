@@ -13,11 +13,11 @@ class Categories extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-    		\Magento\Framework\App\Action\Context $context,
-    		\Magento\Framework\View\Result\PageFactory $pageFactory,
-    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
-		\Magento\Framework\App\RequestInterface $request
+            \Magento\Framework\App\Action\Context $context,
+            \Magento\Framework\View\Result\PageFactory $pageFactory,
+            \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+            \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
         

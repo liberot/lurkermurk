@@ -14,15 +14,14 @@ class CategoriesById extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-    		\Magento\Framework\App\Action\Context $context,
-    		\Magento\Framework\View\Result\PageFactory $pageFactory,
-    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-		\Magento\Catalog\Model\CategoryFactory $catFactory,
-		\Magento\Catalog\Model\ProductFactory $prodFactory,
-		\Magento\Framework\App\RequestInterface $request
+            \Magento\Framework\App\Action\Context $context,
+            \Magento\Framework\View\Result\PageFactory $pageFactory,
+            \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+            \Magento\Catalog\Model\CategoryFactory $catFactory,
+            \Magento\Catalog\Model\ProductFactory $prodFactory,
+            \Magento\Framework\App\RequestInterface $request
         )
     {
-       
         $this->request = $request; 
         $this->pageFactory = $pageFactory;
         $this->jsonFactory = $jsonFactory;
