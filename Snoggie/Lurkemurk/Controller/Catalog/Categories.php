@@ -17,7 +17,7 @@ class Categories extends \Magento\Framework\App\Action\Action
     		\Magento\Framework\View\Result\PageFactory $pageFactory,
     		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
     		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
-            \Magento\Framework\App\RequestInterface $request
+		\Magento\Framework\App\RequestInterface $request
         )
     {
         

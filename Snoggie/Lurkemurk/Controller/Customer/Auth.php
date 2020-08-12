@@ -41,9 +41,6 @@ class Auth extends \Magento\Framework\App\Action\Action
         $websiteId = $this->storeManager->getWebsite()->getWebsiteId();
         $storeId = $this->storeManager->getStore()->getStoreId();
         
-        $this->customer->setWebsiteId($websiteId);
-        $this->customer->setStoreId($storeId);
-
         $json = $this->jsonFactory->create();
         $data = [];
         
@@ -54,6 +51,9 @@ class Auth extends \Magento\Framework\App\Action\Action
         $name = '';
         $auth = false; 
         
+
+        $this->customer->setWebsiteId($websiteId);
+        $this->customer->setStoreId($storeId);
         $this->customer = $this->customer->loadByEmail($clnt);
 
         if($this->customer->getConfirmation() 
@@ -84,7 +84,6 @@ class Auth extends \Magento\Framework\App\Action\Action
             return $json;
         };
     
-        // no auth 
         $data = array(
             'cmd'=>$this->request->getActionName(),
             'auth'=>'false',

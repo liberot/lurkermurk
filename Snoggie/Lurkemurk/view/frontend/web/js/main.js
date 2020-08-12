@@ -79,7 +79,9 @@ function(jQuery){ 'use strict';
             CP.post('/lurkemurk/customer/register', {'clnt': 'igit@igit.igit', 'pass':'31affe', 'forename':'Pixi', 'surename': 'Xacua'});
             // 
             CP.post('/lurkemurk/cart/truncate');
-            CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'3'});
+            CP.post('/lurkemurk/cart/put', {'pid':'8', 'qty':'7'});
+            CP.post('/lurkemurk/cart/put', {'pid':'12', 'qty':'5'});
+            CP.post('/lurkemurk/cart/put', {'pid':'15', 'qty':'3'});
             CP.post('/lurkemurk/cart/remove', {'pid':'8'});
             // 
             CP.load('/lurkemurk/cart/listitems');

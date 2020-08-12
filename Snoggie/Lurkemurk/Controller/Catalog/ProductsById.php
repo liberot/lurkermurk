@@ -17,15 +17,15 @@ class ProductsById extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-    		\Magento\Framework\App\Action\Context $context,
-    		\Magento\Framework\View\Result\PageFactory $pageFactory,
-    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-            \Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-    		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
-            \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
-            \Magento\Catalog\Model\ProductFactory $prodFactory,
-            \Magento\Framework\App\RequestInterface $request,
-            \Magento\Catalog\Api\ProductRepositoryInterface $productRepo
+		\Magento\Framework\App\Action\Context $context,
+		\Magento\Framework\View\Result\PageFactory $pageFactory,
+		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+		\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory $catFactory,
+		\Magento\Catalog\Model\ProductFactory $prodFactory,
+		\Magento\Framework\App\RequestInterface $request,
+		\Magento\Catalog\Api\ProductRepositoryInterface $productRepo
         )
     {
        
@@ -57,7 +57,8 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     $val.= ',';
                     $ids = explode(',', $val);
                     foreach($ids as $id){
-                        $prod = $prodFactory->load($id);
+                        if(null == $id){ continue; }
+			$prod = $prodFactory->load($id);
                         if(null != $prod->getId()){
                             $prdz[]= array(
                                 'sku'=>$prod->getSKU(),
@@ -80,6 +81,7 @@ class ProductsById extends \Magento\Framework\App\Action\Action
                     $val.= ',';
                     $skus = explode(',', $val);
                     foreach($skus as $sku){
+                        if(null == $sku){ continue; }
                         $id = $prodFactory->getIdBySku($sku);
                         $prod = $prodFactory->load($id);
                         if(null != $prod->getId()){

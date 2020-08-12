@@ -16,14 +16,14 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
     
     public function __construct
     	(
-    		\Magento\Framework\App\Action\Context $context,
-    		\Magento\Framework\View\Result\PageFactory $pageFactory,
-    		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-    		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
-            \Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
-    		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
-            \Magento\Catalog\Model\CategoryFactory $catFactory,
-            \Magento\Framework\App\RequestInterface $request
+		\Magento\Framework\App\Action\Context $context,
+		\Magento\Framework\View\Result\PageFactory $pageFactory,
+		\Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
+		\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $prodFactory,
+		\Magento\Catalog\Model\Product\Attribute\Source\Status $prodStatus,
+		\Magento\Catalog\Model\Product\Visibility $prodVisibility,
+		\Magento\Catalog\Model\CategoryFactory $catFactory,
+		\Magento\Framework\App\RequestInterface $request
         )
     {
        
@@ -50,6 +50,7 @@ class ProductsOfCategory extends \Magento\Framework\App\Action\Action
                 $val.= ',';
                 $ids = explode(',', $val);
                 foreach($ids as $id){
+                    if(null == $id){ continue; }
                     $cat = $catFactory->load($id);
                     $coll = $cat->getProductCollection();
                     $coll
